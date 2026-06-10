@@ -1,0 +1,170 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Retilo brand theme — light marketing palette ported from
+ * retilo-frontend/app/globals.css (:root, oklch → hsl). Near-white
+ * background with the signature violet primary (oklch 0.55 0.24 280).
+ */
+@layer base {
+  :root {
+    --background: 240 30% 99%;
+    --foreground: 250 20% 9%;
+    --card: 0 0% 100%;
+    --card-foreground: 250 20% 9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 250 20% 9%;
+    --primary: 262 78% 55%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 250 14% 96%;
+    --secondary-foreground: 250 12% 22%;
+    --muted: 250 14% 96%;
+    --muted-foreground: 250 8% 42%;
+    --accent: 262 45% 95%;
+    --accent-foreground: 262 30% 25%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 250 14% 90%;
+    --input: 250 14% 90%;
+    --ring: 262 78% 55%;
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* ── Retilo utilities (light variants of the app's cult-ui set) ── */
+@layer utilities {
+  .gradient-text {
+    background: linear-gradient(
+      135deg,
+      hsl(262 85% 56%),
+      hsl(295 80% 52%),
+      hsl(222 90% 56%)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-text-pb {
+    background: linear-gradient(135deg, hsl(262 85% 56%) 0%, hsl(235 88% 58%) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .glass {
+    background: hsl(0 0% 100% / 0.72);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid hsl(250 20% 9% / 0.08);
+  }
+
+  .glass-card {
+    background: hsl(0 0% 100% / 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid hsl(250 20% 9% / 0.07);
+    border-radius: 1.25rem;
+    box-shadow: 0 1px 2px hsl(250 20% 9% / 0.04), 0 8px 24px -12px hsl(250 20% 9% / 0.08);
+  }
+
+  .glow-purple {
+    box-shadow: 0 0 40px -8px hsl(262 78% 55% / 0.45);
+  }
+
+  .glow-purple-sm {
+    box-shadow: 0 0 20px -4px hsl(262 78% 55% / 0.3);
+  }
+
+  .bg-grid {
+    background-image: linear-gradient(hsl(250 20% 9% / 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(250 20% 9% / 0.045) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .bg-dots {
+    background-image: radial-gradient(circle, hsl(250 20% 9% / 0.12) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  /* Recolors the template's peach clay renders (~hue 20°) to Retilo
+     lavender (~hue 270°). Remove this class to fall back to the
+     original template color. */
+  .clay-retilo {
+    filter: hue-rotate(248deg) saturate(1.1);
+  }
+}
+
+/* Floating bubble animation (same easing/feel as the template) */
+@keyframes orb-float {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  25% {
+    transform: translate3d(18px, -26px, 0) scale(1.05);
+  }
+  50% {
+    transform: translate3d(-12px, -44px, 0) scale(0.97);
+  }
+  75% {
+    transform: translate3d(-22px, -14px, 0) scale(1.03);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+.animate-orb-float {
+  animation-name: orb-float;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-orb-float {
+    animation: none;
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(250 14% 96%);
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(250 10% 80%);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(262 50% 65%);
+}
+
+.no-visible-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+}
+.no-visible-scrollbar::-webkit-scrollbar {
+  display: none;
+}

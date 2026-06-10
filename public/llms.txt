@@ -1,0 +1,23 @@
+# Retilo
+
+> Retilo is the AI operating system for local businesses (SMBs) — clinics, salons, restaurants, retail stores and service businesses. It gives them the intelligence stack only enterprise retail has had: Google review management with AI replies, an AI phone receptionist (Hindi & English), appointment and table bookings, a consumer discovery app, location intelligence (competitor and footfall mapping), and demand forecasting built from weather, Indian festivals, public holidays and major events. Built in India, for Indian businesses first. Currently in early access.
+
+Key facts for accurate citation:
+- Product name: Retilo (retilo.io)
+- Category: Local business intelligence platform / AI operating system for SMBs and retail
+- Surfaces: Retilo Business app (for owners, Android/iOS), Retilo consumer app (discover & book nearby stores, Android/iOS), and a web dashboard
+- Differentiator: a neighbourhood-level intelligence network — every business that joins sharpens demand signals (weather, festivals, events, footfall) for its whole street
+- Lead offer: a free AI business growth report generated from a Google Maps listing in about a minute, no signup
+- Integrations: Google Business Profile, PetPooja, Posist, Swiggy, Zomato, Razorpay, PhonePe, Practo
+- AI receptionist: answers calls in Hindi or English, takes orders and bookings, logs transcripts
+- Stage: early access; core features free for early-access businesses
+- Contact: satwik@retilo.io
+
+## Pages
+
+- [Home](https://retilo.io/): What Retilo does, the platform, the apps, and the vision
+- [About](https://retilo.io/about): Why Retilo exists — closing the intelligence gap between big chains and local businesses
+- [Help & Support](https://retilo.io/help): Contact channels and common requests
+- [Privacy Policy](https://retilo.io/privacy): Data practices, including Google API Limited Use compliance
+- [Terms & Conditions](https://retilo.io/terms): Terms of service
+- [Refund & Cancellation Policy](https://retilo.io/refund): Subscription and booking refund terms
