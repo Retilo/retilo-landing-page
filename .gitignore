@@ -16,5 +16,6 @@ tsconfig.tsbuildinfo
 .env.*
 !.env.example
 
-# MCP config carries the cult-ui pro API key — keep it local
+# MCP + registry config carry the cult-ui pro API key — keep them local
 .mcp.json
+components.json
