@@ -34,10 +34,13 @@ export const siteConfig = {
   providerPlayStoreUrl: "",
   providerAppStoreUrl: "",
 
+  // Docs
+  docsUrl: "https://docs.retilo.io",
+
   // Social
-  twitterUrl: "https://x.com/retilo_ai",
-  instagramUrl: "https://instagram.com/retilo.ai",
-  linkedinUrl: "https://linkedin.com/company/retilo",
+  twitterUrl: "https://x.com/Retilo_",
+  instagramUrl: "https://www.instagram.com/retilo.io?igsh=a2l6eXZneDg1aml6",
+  linkedinUrl: "https://www.linkedin.com/company/retiloio/",
   youtubeUrl: "",
   facebookUrl: "",
 

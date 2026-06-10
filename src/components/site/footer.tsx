@@ -19,6 +19,7 @@ const productLinks = [
   { href: "/#apps", label: "Retilo for Business" },
   { href: "/#apps", label: "Retilo Consumer App" },
   { href: siteConfig.appUrl, label: "Web Dashboard", external: true },
+  { href: siteConfig.docsUrl, label: "Documentation", external: true },
 ]
 
 const companyLinks = [

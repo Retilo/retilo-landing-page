@@ -13,6 +13,7 @@ const links = [
   { href: "/#apps", label: "Apps" },
   { href: "/#vision", label: "Why Retilo" },
   { href: "/#faq", label: "FAQ" },
+  { href: siteConfig.docsUrl, label: "Docs", external: true },
 ]
 
 export function Navbar() {
@@ -37,15 +38,27 @@ export function Navbar() {
           </Link>
 
           <div className="hidden items-center gap-8 md:flex">
-            {links.map((l) => (
-              <Link
-                key={l.href}
-                href={l.href}
-                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-              >
-                {l.label}
-              </Link>
-            ))}
+            {links.map((l) =>
+              l.external ? (
+                <a
+                  key={l.href}
+                  href={l.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  {l.label}
+                </a>
+              ) : (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  {l.label}
+                </Link>
+              )
+            )}
           </div>
 
           <div className="hidden items-center gap-3 md:flex">
@@ -78,16 +91,29 @@ export function Navbar() {
             open ? "flex" : "hidden"
           )}
         >
-          {links.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              onClick={() => setOpen(false)}
-              className="rounded-lg px-3 py-2 text-sm text-muted-foreground hover:bg-foreground/5 hover:text-foreground"
-            >
-              {l.label}
-            </Link>
-          ))}
+          {links.map((l) =>
+            l.external ? (
+              <a
+                key={l.href}
+                href={l.href}
+                target="_blank"
+                rel="noreferrer"
+                onClick={() => setOpen(false)}
+                className="rounded-lg px-3 py-2 text-sm text-muted-foreground hover:bg-foreground/5 hover:text-foreground"
+              >
+                {l.label}
+              </a>
+            ) : (
+              <Link
+                key={l.href}
+                href={l.href}
+                onClick={() => setOpen(false)}
+                className="rounded-lg px-3 py-2 text-sm text-muted-foreground hover:bg-foreground/5 hover:text-foreground"
+              >
+                {l.label}
+              </Link>
+            )
+          )}
           <a
             href={siteConfig.appUrl}
             className="mt-1 rounded-xl bg-primary px-3 py-2 text-center text-sm font-semibold text-primary-foreground"
