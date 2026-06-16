@@ -1,10 +1,10 @@
 import {
   CalendarCheck,
-  CloudSun,
-  MapPin,
+  Globe,
+  IndianRupee,
+  MessageCircle,
   PhoneCall,
   Plug,
-  Search,
   Star,
 } from "lucide-react"
 
@@ -13,52 +13,52 @@ import { cn } from "@/lib/utils"
 
 const features = [
   {
-    icon: PhoneCall,
-    title: "An AI receptionist that never misses a call",
+    icon: MessageCircle,
+    title: "Unified WhatsApp & chat inbox",
     description:
-      "Answers in Hindi or English, takes orders, books tables and appointments, and hands you the transcript — even at 11pm on a Sunday. Every missed call used to be a lost customer. Not anymore.",
+      "Every customer message — WhatsApp, website chat, SMS — lands in one shared inbox. Assign to staff, reply with AI suggestions, and never let a conversation fall through the cracks.",
     span: "md:col-span-2",
+  },
+  {
+    icon: PhoneCall,
+    title: "AI receptionist that never misses a call",
+    description:
+      "Answers in Hindi or English, takes orders, books appointments, and sends you the transcript — even at 11 PM on a Sunday. Missed calls are now captured leads.",
+    span: "",
   },
   {
     icon: Star,
-    title: "Reputation on autopilot",
+    title: "Reviews on autopilot",
     description:
-      "Google reviews synced, sentiment analyzed, AI replies drafted in your voice. Watch your rating, response rate and health score climb without lifting a finger.",
+      "Sends a WhatsApp review request after every visit. AI replies in your voice across Google, JustDial, and IndiaMART. Watch your rating climb without lifting a finger.",
     span: "",
   },
   {
-    icon: CloudSun,
-    title: "Know tomorrow before it happens",
+    icon: Globe,
+    title: "Website chat → WhatsApp handoff",
     description:
-      "Weather, festivals, public holidays, even the cricket schedule — fused into one demand forecast for your exact location. \"Eid + pleasant weather: stock up 30–40%.\" That specific.",
-    span: "",
-  },
-  {
-    icon: MapPin,
-    title: "Your street, decoded",
-    description:
-      "Every competitor, every footfall driver — metro stations, malls, hospitals, offices — mapped and scored. Know exactly where you stand and where the opportunity is.",
+      "A branded chat widget on your site captures the visitor's name and question, then continues the conversation on WhatsApp — where Indian customers actually respond.",
     span: "md:col-span-2",
+  },
+  {
+    icon: IndianRupee,
+    title: "Collect payments via WhatsApp",
+    description:
+      "Send a UPI payment link inside any chat. Customers pay in two taps. Works with PhonePe, GPay, Paytm, and every major UPI app — no POS, no redirect.",
+    span: "",
   },
   {
     icon: CalendarCheck,
     title: "Bookings that fill your day",
     description:
-      "Consultations, haircuts, tables — customers book through the Retilo app, your AI receptionist, or walk-ins. One queue, your hours, zero double-bookings.",
-    span: "",
-  },
-  {
-    icon: Search,
-    title: "Be found by humans and AI",
-    description:
-      "When people ask ChatGPT or Google for \"best salon near me\", will you show up? Retilo audits and fixes your visibility across search engines and AI assistants.",
+      "Consultations, haircuts, tables — customers book through the Retilo app, the AI receptionist, or the website widget. One queue, your hours, zero double-bookings.",
     span: "",
   },
   {
     icon: Plug,
     title: "Plugs into what you already use",
     description:
-      "PetPooja, Posist, Swiggy, Zomato, Razorpay, PhonePe, Practo — your existing systems feed the brain. No rip-and-replace.",
+      "PetPooja, Posist, Swiggy, Zomato, Razorpay, PhonePe, Practo — your existing systems feed the platform. No rip-and-replace, no migration headache.",
     span: "",
   },
 ]
@@ -74,9 +74,9 @@ export function Platform() {
             The platform
           </p>
           <h2 className="mt-3 max-w-3xl text-3xl font-bold tracking-tight sm:text-5xl">
-            Seven departments&apos; worth of firepower.
+            One AI employee.
             <br />
-            <span className="gradient-text-pb">Zero new headcount.</span>
+            <span className="gradient-text-pb">Seven jobs done.</span>
           </h2>
         </Reveal>
 

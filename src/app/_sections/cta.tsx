@@ -14,22 +14,28 @@ export function CTA() {
             <FloatingOrbs className="z-0 opacity-70" />
 
             <h2 className="relative text-3xl font-bold tracking-tight sm:text-5xl">
-              See your business the way
+              Stop missing customers.
               <br />
-              <span className="gradient-text">an enterprise would.</span>
+              <span className="gradient-text">Start with Retilo — free.</span>
             </h2>
             <p className="relative mx-auto mt-5 max-w-xl text-base text-muted-foreground sm:text-lg">
-              Paste your Google Maps link. In about a minute you&apos;ll have a
-              scored growth report — your reputation, your visibility, your
-              street, your next moves. Free, no signup.
+              Paste your Google Maps link. In 60 seconds you&apos;ll see exactly
+              how many leads you&apos;re losing and what fixing it looks like —
+              free, no credit card, no signup needed.
             </p>
-            <div className="relative mt-9 flex justify-center">
+            <div className="relative mt-9 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
               <a
                 href={siteConfig.appUrl}
                 className="group inline-flex items-center gap-2 rounded-2xl bg-primary px-8 py-4 text-base font-semibold text-primary-foreground transition-all hover:brightness-110 glow-purple"
               >
-                Scan my business — free
+                Get started free
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              </a>
+              <a
+                href={`mailto:${siteConfig.inquiryEmail}`}
+                className="inline-flex items-center gap-2 rounded-2xl border border-border px-8 py-4 text-base font-semibold text-foreground transition-colors hover:bg-foreground/5"
+              >
+                Book a demo
               </a>
             </div>
           </div>
