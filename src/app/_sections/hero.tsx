@@ -1,8 +1,8 @@
 import { ArrowRight, MessageCircle, Sparkles, Star, Zap } from "lucide-react"
 
 import { siteConfig } from "@/config/site"
+import { AgentNPC } from "@/components/site/agent-npc"
 import { ClayBubbles } from "@/components/site/clay-bubbles"
-import { HeroAgents } from "@/components/site/hero-agents"
 import { Reveal } from "@/components/site/reveal"
 import { StoreBadges } from "@/components/site/store-badges"
 
