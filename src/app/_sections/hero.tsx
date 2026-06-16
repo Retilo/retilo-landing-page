@@ -85,7 +85,9 @@ export function Hero() {
           </div>
         </Reveal>
 
-        <HeroAgents />
+        <div className="relative mt-12 flex justify-center sm:absolute sm:bottom-0 sm:left-4 sm:mt-0 sm:justify-start lg:left-10">
+          <AgentNPC />
+        </div>
       </div>
     </section>
   )
