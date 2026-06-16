@@ -37,6 +37,13 @@ export const siteConfig = {
   // Docs
   docsUrl: "https://docs.retilo.io",
 
+  // Booking — same Calendly used across retilo-frontend (nav/hero/footer/CTA)
+  calendlyUrl: "https://calendly.com/satwikloka321/retilo",
+
+  // ElevenLabs Conversational AI — public agent ID for the hero's
+  // voice-talkback. Public agents need no API key/server route.
+  elevenLabsAgentId: process.env.NEXT_PUBLIC_ELEVENLABS_AGENT_ID ?? "",
+
   // Social
   twitterUrl: "https://x.com/Retilo_",
   instagramUrl: "https://www.instagram.com/retilo.io?igsh=a2l6eXZneDg1aml6",
