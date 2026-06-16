@@ -31,11 +31,7 @@ const SILENCE_CHECK_INTERVAL_MS = 5_000
  * conversation (requires mic permission — browsers block this without a
  * user gesture, hence the tap instead of auto-playing on load).
  */
-function AgentNPCInner({
-  bubbleOffsetClassName = "top-0",
-}: {
-  bubbleOffsetClassName?: string
-}) {
+function AgentNPCInner() {
   const [greeted, setGreeted] = useState(false)
   const [skipWalk, setSkipWalk] = useState(false)
   const lastActivityRef = useRef(Date.now())
@@ -121,7 +117,6 @@ function AgentNPCInner({
           modelUrl="/models/agent.glb"
           skipWalk={skipWalk}
           loopGesture={conversation.status === "disconnected"}
-          enterFrom="right"
           onGreet={() => setGreeted(true)}
         />
       </motion.div>
@@ -132,7 +127,7 @@ function AgentNPCInner({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9 }}
             transition={{ type: "spring", stiffness: 260, damping: 20 }}
-            className={`glass pointer-events-none absolute left-1/2 -translate-x-1/2 whitespace-nowrap rounded-2xl px-4 py-2 text-sm font-medium text-foreground shadow-lg ${bubbleOffsetClassName}`}
+            className="glass pointer-events-none absolute left-1/2 top-0 -translate-x-1/2 whitespace-nowrap rounded-2xl px-4 py-2 text-sm font-medium text-foreground shadow-lg"
           >
             {hasAgentId ? BUBBLE_TEXT[bubbleState] : "Got this in your store? 👀"}
           </motion.div>
@@ -142,14 +137,10 @@ function AgentNPCInner({
   )
 }
 
-export function AgentNPC({
-  bubbleOffsetClassName,
-}: {
-  bubbleOffsetClassName?: string
-}) {
+export function AgentNPC() {
   return (
     <ConversationProvider>
-      <AgentNPCInner bubbleOffsetClassName={bubbleOffsetClassName} />
+      <AgentNPCInner />
     </ConversationProvider>
   )
 }
