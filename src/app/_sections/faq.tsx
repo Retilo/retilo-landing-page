@@ -9,27 +9,27 @@ import { Reveal } from "@/components/site/reveal"
 const faqs = [
   {
     q: "What does Retilo actually do for my business?",
-    a: "Retilo handles the work big chains hire whole departments for: it replies to your Google reviews, answers your phone with an AI receptionist, takes bookings 24/7, lists you in the Retilo discovery app, maps your competitors and footfall drivers, and forecasts demand for your exact location — weather, festivals, holidays and all. You run the business; Retilo runs the intelligence.",
+    a: "Retilo is your AI employee for customer communication. It responds to WhatsApp leads in seconds, sends automated review requests after every visit, answers calls 24/7 in Hindi or English, books appointments, sends UPI payment links, and runs your website chat — all from one dashboard. You run the business; Retilo handles the customer side.",
+  },
+  {
+    q: "How does the WhatsApp inbox work?",
+    a: "All your customer WhatsApp messages land in a shared Retilo inbox — you and your team can see, assign, and reply from the web or mobile app. The AI suggests replies based on your FAQs and past conversations. Works with your existing WhatsApp Business number via the official WhatsApp Business API.",
+  },
+  {
+    q: "How do automated review requests work?",
+    a: "After every appointment, order, or visit, Retilo sends the customer a WhatsApp message with a one-tap link to leave a Google review. The timing, the message, and the follow-up are all automated. For businesses already using Retilo, average review volume goes up 3× in the first month.",
   },
   {
     q: "Which businesses is Retilo built for?",
-    a: "Clinics, salons, restaurants, retail stores and local service businesses. If customers call you, book you, or find you on Google Maps, Retilo is built for you. We're India-first — Hindi-speaking AI receptionist, Indian festival calendar, UPI and local POS integrations included.",
+    a: "Clinics, salons, restaurants, auto dealers, gyms, home services, retail stores, and coaching centres. If customers call you, WhatsApp you, or find you on Google Maps, Retilo is built for you. India-first: Hindi AI receptionist, UPI payments, Indian festival calendar, and integrations with Swiggy, Zomato, Practo, and local POS systems.",
   },
   {
     q: "How much does it cost?",
-    a: "We're in early access, and early-access businesses get Retilo free while we build with them. Start with the free AI business scan — no card, no signup — and we'll onboard you from there. Pricing will always stay SMB-honest: a fraction of one missed customer a day.",
+    a: "Plans start at ₹1,999/month. Early-access businesses get 3 months free while we build with them. All plans include a 14-day trial — no credit card needed. Annual billing saves 20%. Custom pricing is available for hospital chains and retail franchises.",
   },
   {
-    q: "Do I need any technical skills?",
-    a: "None. Paste your Google Maps link and Retilo sets itself up — your profile, your listing, your first growth report. Connecting your Google Business Profile is one tap of consent. If you can use WhatsApp, you can use Retilo.",
-  },
-  {
-    q: "How does the AI phone receptionist work?",
-    a: "You get a dedicated number (or forward your existing one). The AI answers in Hindi or English, knows your menu or services, takes orders and bookings, and logs every call with a transcript and summary in your app. Calls you'd have missed become customers you keep.",
-  },
-  {
-    q: "What happens to my data?",
-    a: "Your data stays yours. We use it to power your dashboards and forecasts — never to sell to third parties. Google account access is read/reply-scoped to your Business Profile only, and you can disconnect any time. Full details in our Privacy Policy.",
+    q: "Do I need technical skills to set it up?",
+    a: "None. Paste your Google Maps link and Retilo scans your business in 60 seconds. Connecting WhatsApp takes one QR code scan. Connecting Google Business Profile is one tap of consent. If you can use WhatsApp, you can use Retilo.",
   },
 ]
 

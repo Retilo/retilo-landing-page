@@ -4,8 +4,11 @@ import { Apps } from "./_sections/apps"
 import { CTA } from "./_sections/cta"
 import { FAQ } from "./_sections/faq"
 import { Hero } from "./_sections/hero"
+import { Industries } from "./_sections/industries"
 import { Platform } from "./_sections/platform"
+import { Pricing } from "./_sections/pricing"
 import { Problem } from "./_sections/problem"
+import { Stats } from "./_sections/stats"
 import { Vision } from "./_sections/vision"
 
 // Structured data so search engines AND AI engines (ChatGPT, Claude,
@@ -47,13 +50,16 @@ const jsonLd = {
       },
       publisher: { "@id": `${siteConfig.url}/#organization` },
       featureList: [
-        "Google review management with AI replies",
-        "AI phone receptionist (Hindi & English)",
-        "Appointment & table bookings",
-        "Local store discovery app",
-        "Demand forecasting from weather, festivals and events",
-        "Location intelligence and competitor mapping",
-        "POS, delivery and payments integrations",
+        "Unified WhatsApp inbox for customer messages",
+        "Automated Google review requests via WhatsApp",
+        "AI review replies across Google, JustDial, and IndiaMART",
+        "AI phone receptionist in Hindi and English",
+        "Appointment and table bookings",
+        "UPI payment collection via WhatsApp",
+        "Website chat widget with WhatsApp handoff",
+        "WhatsApp marketing campaigns",
+        "Local business discovery app",
+        "POS, delivery, and payments integrations",
       ],
     },
   ],
@@ -67,9 +73,12 @@ export default function LandingPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Hero />
+      <Stats />
       <Problem />
       <Platform />
+      <Industries />
       <Apps />
+      <Pricing />
       <Vision />
       <FAQ />
       <CTA />

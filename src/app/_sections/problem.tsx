@@ -2,16 +2,16 @@ import { Reveal } from "@/components/site/reveal"
 
 const gaps = [
   {
-    they: "Demand-forecasting teams predicting every weekend, festival and rain shower",
-    you: "A gut feeling about whether tomorrow will be busy",
+    they: "Dedicated response teams answering every WhatsApp lead within minutes — around the clock",
+    you: "Messages sitting on read while you're with another customer. Leads go cold.",
   },
   {
-    they: "Call centres and revenue managers so no booking ever slips",
-    you: "Missed calls during rush hour — each one a customer lost",
+    they: "Automated software sending hundreds of review requests a week and replying to each one",
+    you: "Forgetting to ask, asking awkwardly at the counter, watching your 3.8 rating collect dust.",
   },
   {
-    they: "Location-analytics departments studying every street before they open",
-    you: "No idea who your real competitors are, or where your footfall comes from",
+    they: "A 24/7 AI that qualifies leads, books slots, and collects UPI payments — even at midnight on Sunday",
+    you: "Every enquiry after 8 PM goes unanswered. That's your busiest window gone.",
   },
 ]
 
@@ -21,18 +21,17 @@ export function Problem() {
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
           <h2 className="max-w-3xl text-3xl font-bold tracking-tight sm:text-5xl">
-            Enterprise retail runs on intelligence.
+            Big businesses never miss a customer.
             <br />
             <span className="text-muted-foreground">
-              Main Street runs on gut feeling.
+              You&apos;ve been missing dozens.
             </span>
           </h2>
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-            Every tool out there digitizes your billing or your menus. Nobody
-            gives the corner clinic, the family restaurant, or the local salon
-            what the giants actually compete with —{" "}
-            <span className="text-foreground">decisions</span>. That&apos;s the
-            problem Retilo exists to solve.
+            Enterprise brands have entire teams for customer communication,
+            reputation management, and lead response. Local businesses have been
+            left to juggle WhatsApp, missed calls, and Google reviews manually.
+            That gap is what Retilo closes.
           </p>
         </Reveal>
 
