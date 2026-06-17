@@ -6,7 +6,6 @@ import { FAQ } from "./_sections/faq"
 import { Hero } from "./_sections/hero"
 import { Industries } from "./_sections/industries"
 import { Platform } from "./_sections/platform"
-import { Pricing } from "./_sections/pricing"
 import { Problem } from "./_sections/problem"
 import { Stats } from "./_sections/stats"
 import { Vision } from "./_sections/vision"
@@ -78,7 +77,6 @@ export default function LandingPage() {
       <Platform />
       <Industries />
       <Apps />
-      <Pricing />
       <Vision />
       <FAQ />
       <CTA />
