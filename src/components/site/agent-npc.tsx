@@ -32,8 +32,8 @@ function AgentNPCInner() {
   const [agentText, setAgentText] = useState("")
   const [userText, setUserText] = useState("")
   const lastActivityRef = useRef(Date.now())
-  const userClearRef = useRef<ReturnType<typeof setTimeout>>()
-  const agentClearRef = useRef<ReturnType<typeof setTimeout>>()
+  const userClearRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
+  const agentClearRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
 
   const conversation = useConversation({
     onError: (message) => console.error("ElevenLabs conversation error:", message),
