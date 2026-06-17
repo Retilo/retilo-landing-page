@@ -20,6 +20,12 @@ const STATUS_HINT: Record<"idle" | "connecting" | "error", string> = {
 const SILENCE_TIMEOUT_MS = 90_000
 const SILENCE_CHECK_INTERVAL_MS = 5_000
 
+const END_PHRASES = [
+  "stop", "end call", "end the call", "hang up", "bye", "goodbye",
+  "good bye", "that's all", "thats all", "i'm done", "im done",
+  "stop talking", "disconnect", "cut the call",
+]
+
 // Any of these counts as "user is present" — we start the session on the first
 // one so the conversation feels self-invoked without violating browser autoplay rules.
 const TRIGGER_EVENTS = ["click", "scroll", "mousemove", "touchstart", "keydown"] as const
@@ -41,6 +47,12 @@ function AgentNPCInner() {
         clearTimeout(userClearRef.current)
         setUserText(payload.message)
         userClearRef.current = setTimeout(() => setUserText(""), 4000)
+
+        // End session if user says something like "stop", "bye", "cut the call" etc.
+        const lower = payload.message.toLowerCase().trim()
+        if (END_PHRASES.some((p) => lower === p || lower.includes(p))) {
+          conversation.endSession()
+        }
       }
     },
     onAgentChatResponsePart: ({ text, type }) => {
@@ -196,7 +208,7 @@ function AgentNPCInner() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 2 }}
             transition={{ type: "spring", stiffness: 280, damping: 24 }}
-            className="mt-1 text-[11px] text-muted-foreground/50 underline underline-offset-2 decoration-dotted transition-colors hover:text-muted-foreground"
+            className="mt-1 text-xs text-muted-foreground/60 underline underline-offset-2 decoration-dotted transition-colors hover:text-muted-foreground"
             aria-label="End conversation"
           >
             stop talking
