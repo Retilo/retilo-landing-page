@@ -13,24 +13,22 @@ const AgentScene = dynamic(
 )
 
 const BUBBLE_TEXT: Record<"idle" | "connecting" | "live" | "error", string> = {
-  idle: "Tap to hear from Retilo 🔊",
+  idle: "Tap to talk to Retilo 🎙️",
   connecting: "Connecting…",
   live: "Listening…",
   error: "Couldn't connect — tap to retry",
 }
 
-// Client-side backstop: end the call if neither side has said anything for
-// this long, regardless of whatever turn-timeout is (or isn't) configured
-// on the ElevenLabs agent itself.
 const SILENCE_TIMEOUT_MS = 90_000
 const SILENCE_CHECK_INTERVAL_MS = 5_000
 
-/**
- * Walking 3D agent in the hero: walks in, turns to face the visitor, then
- * shows a tappable prompt. Tapping starts a live ElevenLabs voice
- * conversation (requires mic permission — browsers block this without a
- * user gesture, hence the tap instead of auto-playing on load).
- */
+// Events that count as "user is present" — we start the session on the first
+// one instead of waiting for a deliberate click on the NPC. Scroll and
+// mousemove are enough to prove a real person is there without requiring an
+// explicit tap, making the experience feel self-invoked while still satisfying
+// browser autoplay rules (which require a user gesture, not necessarily a click).
+const TRIGGER_EVENTS = ["click", "scroll", "mousemove", "touchstart", "keydown"] as const
+
 function AgentNPCInner() {
   const [greeted, setGreeted] = useState(false)
   const [skipWalk, setSkipWalk] = useState(false)
@@ -42,7 +40,6 @@ function AgentNPCInner() {
     },
   })
 
-  // Silence backstop — see SILENCE_TIMEOUT_MS above.
   useEffect(() => {
     if (conversation.status !== "connected") return
     lastActivityRef.current = Date.now()
@@ -68,42 +65,33 @@ function AgentNPCInner() {
           ? "error"
           : "idle"
 
-  const handleTap = async () => {
-    // No agent ID configured yet — fall back to the old "link to app" CTA
-    // instead of going silent.
-    if (!hasAgentId) {
-      window.location.href = siteConfig.appUrl
-      return
-    }
-    if (conversation.status !== "disconnected") return
-    try {
-      await navigator.mediaDevices.getUserMedia({ audio: true })
-      conversation.startSession({ agentId: siteConfig.elevenLabsAgentId })
-    } catch (err) {
-      console.error("Mic permission / session start failed:", err)
-    }
+  const startConversation = () => {
+    if (!hasAgentId || conversation.status !== "disconnected") return
+    // Call startSession directly — the SDK requests mic permission internally.
+    // Do NOT call getUserMedia first: that consumes the user-gesture context
+    // and leaves the SDK unable to open its own stream.
+    conversation.startSession({ agentId: siteConfig.elevenLabsAgentId })
   }
 
-  // Mic/audio just needs *a* user gesture, not specifically a click on this
-  // character — so the first click/tap anywhere on the page also starts the
-  // conversation, making it feel closer to automatic while staying inside
-  // browser autoplay rules. Stays a no-op once already connecting/connected.
-  const handleTapRef = useRef(handleTap)
-  handleTapRef.current = handleTap
+  // Start on the first sign of user presence (scroll / mousemove / touch /
+  // keydown) so the conversation kicks off automatically without needing an
+  // explicit click on the NPC.
+  const startRef = useRef(startConversation)
+  startRef.current = startConversation
 
   useEffect(() => {
-    const onFirstInteraction = () => {
-      handleTapRef.current()
-      document.removeEventListener("click", onFirstInteraction)
+    const onFirstPresence = () => {
+      startRef.current()
+      TRIGGER_EVENTS.forEach((e) => document.removeEventListener(e, onFirstPresence))
     }
-    document.addEventListener("click", onFirstInteraction)
-    return () => document.removeEventListener("click", onFirstInteraction)
+    TRIGGER_EVENTS.forEach((e) => document.addEventListener(e, onFirstPresence, { once: false, passive: true }))
+    return () => TRIGGER_EVENTS.forEach((e) => document.removeEventListener(e, onFirstPresence))
   }, [])
 
   return (
     <button
       type="button"
-      onClick={handleTap}
+      onClick={startConversation}
       aria-label="Talk to Retilo"
       className="relative h-36 w-28 shrink-0 cursor-pointer text-left sm:h-44 sm:w-32"
     >
