@@ -1,4 +1,7 @@
+"use client"
+
 import { ArrowRight } from "lucide-react"
+import posthog from "posthog-js"
 
 import { siteConfig } from "@/config/site"
 import { FloatingOrbs } from "@/components/site/floating-orbs"
@@ -26,6 +29,9 @@ export function CTA() {
             <div className="relative mt-9 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
               <a
                 href={siteConfig.appUrl}
+                onClick={() =>
+                  posthog.capture("bottom_cta_get_started_clicked")
+                }
                 className="group inline-flex items-center gap-2 rounded-2xl bg-primary px-8 py-4 text-base font-semibold text-primary-foreground transition-all hover:brightness-110 glow-purple"
               >
                 Get started free
@@ -33,6 +39,7 @@ export function CTA() {
               </a>
               <a
                 href={`mailto:${siteConfig.inquiryEmail}`}
+                onClick={() => posthog.capture("bottom_cta_book_demo_clicked")}
                 className="inline-flex items-center gap-2 rounded-2xl border border-border px-8 py-4 text-base font-semibold text-foreground transition-colors hover:bg-foreground/5"
               >
                 Book a demo

@@ -1,15 +1,19 @@
+"use client"
+
 import { Check } from "lucide-react"
+import posthog from "posthog-js"
 
 import { siteConfig } from "@/config/site"
-import { Reveal } from "@/components/site/reveal"
 import { cn } from "@/lib/utils"
+import { Reveal } from "@/components/site/reveal"
 
 const tiers = [
   {
     name: "Starter",
     price: "₹1,999",
     period: "/month",
-    description: "For businesses just getting serious about customer communication.",
+    description:
+      "For businesses just getting serious about customer communication.",
     highlight: false,
     cta: "Start free trial",
     features: [
@@ -43,7 +47,8 @@ const tiers = [
     name: "Scale",
     price: "₹12,999",
     period: "/month",
-    description: "For multi-outlet businesses that need enterprise-grade muscle.",
+    description:
+      "For multi-outlet businesses that need enterprise-grade muscle.",
     highlight: false,
     cta: "Talk to us",
     features: [
@@ -116,7 +121,18 @@ export function Pricing() {
                 </ul>
 
                 <a
-                  href={tier.name === "Scale" ? `mailto:${siteConfig.inquiryEmail}` : siteConfig.appUrl}
+                  href={
+                    tier.name === "Scale"
+                      ? `mailto:${siteConfig.inquiryEmail}`
+                      : siteConfig.appUrl
+                  }
+                  onClick={() =>
+                    posthog.capture("pricing_cta_clicked", {
+                      tier: tier.name,
+                      price: tier.price,
+                      cta: tier.cta,
+                    })
+                  }
                   className={cn(
                     "mt-8 inline-flex w-full items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold transition-all",
                     tier.highlight

@@ -1,4 +1,7 @@
+"use client"
+
 import { ArrowRight, MessageCircle, Sparkles, Star, Zap } from "lucide-react"
+import posthog from "posthog-js"
 
 import { siteConfig } from "@/config/site"
 import { AgentNPC } from "@/components/site/agent-npc"
@@ -18,7 +21,8 @@ export function Hero() {
         <Reveal>
           <span className="glass inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs text-muted-foreground">
             <Sparkles className="h-3.5 w-3.5 text-primary" />
-            Early access — clinics · salons · restaurants · auto dealers · retail
+            Early access — clinics · salons · restaurants · auto dealers ·
+            retail
           </span>
         </Reveal>
 
@@ -62,6 +66,7 @@ export function Hero() {
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <a
               href={siteConfig.appUrl}
+              onClick={() => posthog.capture("hero_cta_clicked")}
               className="group inline-flex items-center gap-2 rounded-2xl bg-primary px-7 py-3.5 text-base font-semibold text-primary-foreground transition-all hover:brightness-110 glow-purple"
             >
               Get started free
@@ -69,6 +74,7 @@ export function Hero() {
             </a>
             <a
               href="#platform"
+              onClick={() => posthog.capture("hero_see_how_it_works_clicked")}
               className="glass inline-flex items-center gap-2 rounded-2xl px-7 py-3.5 text-base font-semibold text-foreground transition-colors hover:bg-foreground/5"
             >
               See how it works

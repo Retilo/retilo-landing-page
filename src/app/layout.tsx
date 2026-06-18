@@ -7,6 +7,7 @@ import { Toaster } from "sonner"
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
 import { Analytics } from "@/components/analytics"
+import { PostHogProvider } from "@/components/posthog-provider"
 import { Footer } from "@/components/site/footer"
 import { Navbar } from "@/components/site/navbar"
 
@@ -66,13 +67,15 @@ export default function RootLayout({ children }: RootLayoutProps) {
           brand.variable
         )}
       >
-        <div className="relative flex min-h-screen flex-col">
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
-        </div>
-        <Toaster theme="light" />
-        <Analytics />
+        <PostHogProvider>
+          <div className="relative flex min-h-screen flex-col">
+            <Navbar />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </div>
+          <Toaster theme="light" />
+          <Analytics />
+        </PostHogProvider>
       </body>
     </html>
   )
