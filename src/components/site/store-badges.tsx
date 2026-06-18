@@ -1,7 +1,7 @@
-import {
-  IconBrandAppstore,
-  IconBrandGooglePlay,
-} from "@tabler/icons-react"
+"use client"
+
+import { IconBrandAppstore, IconBrandGooglePlay } from "@tabler/icons-react"
+import posthog from "posthog-js"
 
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
@@ -47,14 +47,24 @@ export function StoreBadges({
           <span className="text-[10px] uppercase tracking-wide text-muted-foreground">
             {live ? topLine : "Coming soon"}
           </span>
-          <span className={cn("font-semibold", compact ? "text-xs" : "text-sm")}>
+          <span
+            className={cn("font-semibold", compact ? "text-xs" : "text-sm")}
+          >
             {bottomLine}
           </span>
         </span>
       </span>
     )
     return live ? (
-      <a key={bottomLine} href={href} target="_blank" rel="noreferrer">
+      <a
+        key={bottomLine}
+        href={href}
+        target="_blank"
+        rel="noreferrer"
+        onClick={() =>
+          posthog.capture("store_badge_clicked", { store: bottomLine })
+        }
+      >
         {inner}
       </a>
     ) : (

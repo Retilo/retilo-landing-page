@@ -4,6 +4,7 @@ import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Menu, X } from "lucide-react"
+import posthog from "posthog-js"
 
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
@@ -64,12 +65,14 @@ export function Navbar() {
           <div className="hidden items-center gap-3 md:flex">
             <a
               href={`${siteConfig.appUrl}/login`}
+              onClick={() => posthog.capture("navbar_signin_clicked")}
               className="text-sm text-muted-foreground transition-colors hover:text-foreground"
             >
               Sign in
             </a>
             <a
               href={`${siteConfig.appUrl}`}
+              onClick={() => posthog.capture("navbar_cta_clicked")}
               className="rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-all hover:brightness-110 glow-purple-sm"
             >
               Scan my business free
@@ -116,6 +119,7 @@ export function Navbar() {
           )}
           <a
             href={siteConfig.appUrl}
+            onClick={() => posthog.capture("navbar_cta_clicked")}
             className="mt-1 rounded-xl bg-primary px-3 py-2 text-center text-sm font-semibold text-primary-foreground"
           >
             Scan my business free

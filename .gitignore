@@ -19,3 +19,4 @@ tsconfig.tsbuildinfo
 # MCP + registry config carry the cult-ui pro API key — keep them local
 .mcp.json
 components.json
+.env.local

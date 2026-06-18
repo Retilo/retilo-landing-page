@@ -1,3 +1,7 @@
+"use client"
+
+import posthog from "posthog-js"
+
 import {
   Accordion,
   AccordionContent,
@@ -47,7 +51,19 @@ export function FAQ() {
         </Reveal>
 
         <Reveal delay={0.1}>
-          <Accordion type="single" collapsible className="mt-12 w-full space-y-3">
+          <Accordion
+            type="single"
+            collapsible
+            className="mt-12 w-full space-y-3"
+            onValueChange={(value) => {
+              if (value) {
+                const idx = parseInt(value.replace("item-", ""), 10)
+                posthog.capture("faq_question_expanded", {
+                  question: faqs[idx]?.q,
+                })
+              }
+            }}
+          >
             {faqs.map((f, i) => (
               <AccordionItem
                 key={i}
