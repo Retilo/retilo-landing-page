@@ -64,14 +64,14 @@ export function Navbar() {
 
           <div className="hidden items-center gap-3 md:flex">
             <a
-              href={`${siteConfig.appUrl}/login`}
+              href={siteConfig.appLoginUrl}
               onClick={() => posthog.capture("navbar_signin_clicked")}
               className="text-sm text-muted-foreground transition-colors hover:text-foreground"
             >
               Sign in
             </a>
             <a
-              href={`${siteConfig.appUrl}`}
+              href={siteConfig.appRegisterUrl}
               onClick={() => posthog.capture("navbar_cta_clicked")}
               className="rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-all hover:brightness-110 glow-purple-sm"
             >
@@ -118,7 +118,7 @@ export function Navbar() {
             )
           )}
           <a
-            href={siteConfig.appUrl}
+            href={siteConfig.appRegisterUrl}
             onClick={() => posthog.capture("navbar_cta_clicked")}
             className="mt-1 rounded-xl bg-primary px-3 py-2 text-center text-sm font-semibold text-primary-foreground"
           >

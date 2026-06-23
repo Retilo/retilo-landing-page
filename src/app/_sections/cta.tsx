@@ -28,7 +28,7 @@ export function CTA() {
             </p>
             <div className="relative mt-9 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
               <a
-                href={siteConfig.appUrl}
+                href={siteConfig.appRegisterUrl}
                 onClick={() =>
                   posthog.capture("bottom_cta_get_started_clicked")
                 }

@@ -124,7 +124,7 @@ export function Pricing() {
                   href={
                     tier.name === "Scale"
                       ? `mailto:${siteConfig.inquiryEmail}`
-                      : siteConfig.appUrl
+                      : siteConfig.appRegisterUrl
                   }
                   onClick={() =>
                     posthog.capture("pricing_cta_clicked", {

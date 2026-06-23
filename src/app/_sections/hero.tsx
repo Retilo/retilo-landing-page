@@ -65,7 +65,7 @@ export function Hero() {
         <Reveal delay={0.28}>
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <a
-              href={siteConfig.appUrl}
+              href={siteConfig.appRegisterUrl}
               onClick={() => posthog.capture("hero_cta_clicked")}
               className="group inline-flex items-center gap-2 rounded-2xl bg-primary px-7 py-3.5 text-base font-semibold text-primary-foreground transition-all hover:brightness-110 glow-purple"
             >

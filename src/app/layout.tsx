@@ -42,13 +42,24 @@ export const metadata: Metadata = {
     locale: "en_IN",
     url: siteConfig.url,
     siteName: siteConfig.siteName,
-    title: `${siteConfig.siteName} — Enterprise-grade intelligence for every local business`,
+    title: `${siteConfig.siteName} — Your 24/7 AI Employee. Built for India.`,
     description: siteConfig.siteDescription,
+    images: [
+      {
+        url: `${siteConfig.url}/opengraph-image`,
+        width: 1200,
+        height: 630,
+        alt: "Retilo — Your 24/7 AI Employee. Built for India.",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: siteConfig.siteName,
+    site: "@Retilo_",
+    creator: "@Retilo_",
+    title: "Retilo — Your 24/7 AI Employee. Built for India.",
     description: siteConfig.siteDescription,
+    images: [`${siteConfig.url}/twitter-image`],
   },
 }
 

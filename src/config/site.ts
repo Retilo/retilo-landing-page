@@ -14,6 +14,8 @@ export const siteConfig = {
   url: "https://retilo.io",
   apiUrl: "https://api.retilo.com",
   appUrl: "https://app.retilo.io",
+  appRegisterUrl: "https://app.retilo.io/auth?mode=register",
+  appLoginUrl: "https://app.retilo.io/auth?mode=login",
 
   // Canonical policy URLs (referenced by the mobile apps' config + OAuth verification)
   termsUrl: "https://retilo.io/terms",
