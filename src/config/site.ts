@@ -33,7 +33,7 @@ export const siteConfig = {
   appStoreUrl: "", // e.g. https://apps.apple.com/app/id...
 
   // Merchant app (Retilo Business)
-  providerPlayStoreUrl: "",
+  providerPlayStoreUrl: "https://play.google.com/store/apps/details?id=com.retilo.business&pcampaignid=web_share",
   providerAppStoreUrl: "",
 
   // Docs
