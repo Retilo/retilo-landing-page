@@ -87,7 +87,7 @@ export function Hero() {
 
         <Reveal delay={0.36}>
           <div className="mt-12 flex justify-center">
-            <StoreBadges />
+            <StoreBadges variant="business" />
           </div>
         </Reveal>
 

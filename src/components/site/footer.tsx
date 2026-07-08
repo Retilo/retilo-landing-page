@@ -63,7 +63,7 @@ export function Footer() {
               {siteConfig.siteDescription}
             </p>
             <div className="mt-6">
-              <StoreBadges compact />
+              <StoreBadges variant="business" compact />
             </div>
           </div>
 
