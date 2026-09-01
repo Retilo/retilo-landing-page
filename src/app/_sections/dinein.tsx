@@ -78,8 +78,11 @@ function BookingMock() {
         </div>
       </div>
 
-      <div className="mt-3 flex items-center justify-center gap-1 text-[10px] text-muted-foreground">
-        Powered by <span className="font-semibold text-orange-500">Swiggy</span> Dineout
+      <div className="mt-3 flex items-center justify-center gap-1.5 text-[10px] text-muted-foreground">
+        Powered by
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/brands/swiggy.webp" alt="Swiggy" className="h-3.5 w-auto" />
+        Dineout
       </div>
     </div>
   )
@@ -127,6 +130,11 @@ export function Dinein() {
               backed by Swiggy Dineout. Guests tap — never type — and the
               reservation lands in your Swiggy dashboard instantly.
             </p>
+            <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-border bg-foreground/[0.03] px-4 py-2">
+              <span className="text-xs text-muted-foreground">Official reservations via</span>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/brands/swiggy.webp" alt="Swiggy" className="h-5 w-auto" />
+            </div>
 
             <ul className="mt-8 space-y-5">
               {points.map((p) => (
