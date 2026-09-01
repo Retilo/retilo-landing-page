@@ -2,6 +2,7 @@ import { siteConfig } from "@/config/site"
 
 import { Apps } from "./_sections/apps"
 import { CTA } from "./_sections/cta"
+import { Dinein } from "./_sections/dinein"
 import { FAQ } from "./_sections/faq"
 import { Hero } from "./_sections/hero"
 import { Industries } from "./_sections/industries"
@@ -75,6 +76,7 @@ export default function LandingPage() {
       <Stats />
       <Problem />
       <Platform />
+      <Dinein />
       <Industries />
       <Apps />
       <Vision />
