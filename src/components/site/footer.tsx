@@ -18,6 +18,7 @@ const productLinks = [
   { href: "/#platform", label: "Platform" },
   { href: "/#apps", label: "Retilo for Business" },
   { href: "/#apps", label: "Retilo Consumer App" },
+  { href: "/dinein", label: "Table Booking" },
   { href: siteConfig.appUrl, label: "Web Dashboard", external: true },
   { href: siteConfig.docsUrl, label: "Documentation", external: true },
 ]
