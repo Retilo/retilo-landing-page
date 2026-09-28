@@ -1,23 +1,64 @@
 "use client"
 
-import { useState } from "react"
-import { ArrowRight, CalendarCheck, Palette, Sparkles, Users } from "lucide-react"
+import { useRef, useState } from "react"
+import { ArrowRight, CalendarCheck, Check, Loader2, Palette, Search, Sparkles, Users, X } from "lucide-react"
 import posthog from "posthog-js"
 
 import { Reveal } from "@/components/site/reveal"
 
-// Interactive demo widget — visitor enters their restaurant name and jumps to a live demo.
-function DemoWidget() {
-  const [name, setName] = useState("")
+const API = "https://api.retilo.io"
 
-  function tryDemo() {
-    const trimmed = name.trim()
-    posthog.capture("landing_demo_cta_clicked", { restaurantName: trimmed || undefined })
-    const url = trimmed
-      ? `https://book.retilo.io/demo?name=${encodeURIComponent(trimmed)}`
-      : "https://book.retilo.io/demo"
-    window.open(url, "_blank")
+interface SwiggyResult { restaurantId: string; name: string; locality: string }
+
+function DemoWidget() {
+  const [name, setName]           = useState("")
+  const [query, setQuery]         = useState("")
+  const [results, setResults]     = useState<SwiggyResult[]>([])
+  const [searching, setSearching] = useState(false)
+  const [showDrop, setShowDrop]   = useState(false)
+  const [picked, setPicked]       = useState<SwiggyResult | null>(null)
+  const [loading, setLoading]     = useState(false)
+  const searchTimer               = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  async function searchSwiggy(q: string) {
+    if (q.length < 2) { setResults([]); setShowDrop(false); return }
+    setSearching(true); setShowDrop(true)
+    try {
+      const res  = await fetch(`${API}/v1/public/demo/swiggy-search?q=${encodeURIComponent(q)}`)
+      const data = await res.json()
+      setResults(data.restaurants ?? [])
+    } catch { setResults([]) }
+    finally { setSearching(false) }
   }
+
+  function onQueryChange(v: string) {
+    setQuery(v)
+    setPicked(null)
+    if (searchTimer.current) clearTimeout(searchTimer.current)
+    searchTimer.current = setTimeout(() => searchSwiggy(v), 400)
+  }
+
+  async function tryDemo() {
+    if (!name.trim()) return
+    setLoading(true)
+    posthog.capture("landing_demo_cta_clicked", { restaurantName: name.trim(), hasSwiggy: !!picked })
+    try {
+      const res  = await fetch(`${API}/v1/public/demo/setup`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          restaurantName:      name.trim(),
+          swiggyRestaurantId:  picked?.restaurantId,
+          swiggyRestaurantName: picked?.name,
+        }),
+      })
+      const data = await res.json()
+      if (data.slug) window.open(`https://book.retilo.io/demo/chat/${data.slug}`, "_blank")
+    } catch { /* open generic demo as fallback */ window.open("https://book.retilo.io/demo/dinein", "_blank") }
+    finally { setLoading(false) }
+  }
+
+  const displayName = name.trim() || "Your Restaurant"
 
   return (
     <div className="mx-auto w-full max-w-[340px] rounded-[28px] border border-border bg-background/80 p-5 shadow-2xl backdrop-blur">
@@ -29,43 +70,82 @@ function DemoWidget() {
         <div className="flex items-center gap-2 border-b border-border px-3 py-2">
           <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary/15 text-sm">🍽️</div>
           <div>
-            <div className="text-xs font-semibold">{name.trim() || "Your Restaurant"}</div>
+            <div className="text-xs font-semibold">{displayName}</div>
             <div className="text-[10px] text-muted-foreground">AI-powered reservations</div>
           </div>
         </div>
         <div className="space-y-2 p-3">
           <div className="max-w-[85%] rounded-xl rounded-bl-sm bg-foreground/10 px-2.5 py-2 text-[11px] leading-relaxed">
-            Hi! I can help you book a table at <strong>{name.trim() || "your restaurant"}</strong>. What date works?
+            Hi! I can help you book a table at <strong>{displayName}</strong>. What date works?
           </div>
           <div className="ml-auto max-w-[75%] rounded-xl rounded-br-sm bg-primary px-2.5 py-2 text-[11px] text-primary-foreground">
             Table for 2, tomorrow at 7 PM
           </div>
           <div className="max-w-[85%] rounded-xl rounded-bl-sm bg-foreground/10 px-2.5 py-2 text-[11px] leading-relaxed">
-            Checking availability… got a slot at 7:30 PM. Your name?
+            {picked ? `Checking slots at ${picked.name}…` : "Checking availability… got a slot at 7:30 PM. Your name?"}
           </div>
         </div>
       </div>
 
-      {/* Input + CTA */}
-      <div className="space-y-2.5">
+      {/* Inputs */}
+      <div className="space-y-2">
+        {/* Restaurant name */}
         <input
           value={name}
           onChange={(e) => setName(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && tryDemo()}
-          placeholder="Enter your restaurant name…"
+          placeholder="Your restaurant name…"
           maxLength={80}
           className="w-full rounded-xl border border-border bg-foreground/[0.05] px-3.5 py-2.5 text-sm text-foreground outline-none transition placeholder:text-muted-foreground focus:border-primary"
         />
+
+        {/* Swiggy search */}
+        {picked ? (
+          <div className="flex items-center gap-2 rounded-xl border border-green-800/60 bg-green-950/30 px-3 py-2">
+            <Check className="h-3.5 w-3.5 shrink-0 text-green-400" />
+            <span className="flex-1 truncate text-xs font-semibold text-green-400">{picked.name}</span>
+            <button onClick={() => { setPicked(null); setQuery("") }} className="text-muted-foreground hover:text-foreground">
+              <X className="h-3.5 w-3.5" />
+            </button>
+          </div>
+        ) : (
+          <div className="relative">
+            <div className="flex items-center gap-1.5 rounded-xl border border-border bg-foreground/[0.05] px-3 py-2.5">
+              {searching ? <Loader2 className="h-3.5 w-3.5 shrink-0 animate-spin text-muted-foreground" /> : <Search className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />}
+              <input
+                value={query}
+                onChange={(e) => onQueryChange(e.target.value)}
+                placeholder="Find on Swiggy (optional)…"
+                maxLength={80}
+                className="flex-1 bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground"
+              />
+            </div>
+            {showDrop && (
+              <div className="absolute left-0 right-0 top-full z-50 mt-1 max-h-40 overflow-y-auto rounded-xl border border-border bg-background shadow-lg">
+                {searching ? (
+                  <div className="px-3 py-2 text-xs text-muted-foreground">Searching…</div>
+                ) : results.length === 0 ? (
+                  <div className="px-3 py-2 text-xs text-muted-foreground">No results. Try another name.</div>
+                ) : results.map((r) => (
+                  <button key={r.restaurantId} onClick={() => { setPicked(r); setQuery(""); setShowDrop(false) }}
+                    className="flex w-full flex-col border-b border-border/50 px-3 py-2 text-left last:border-0 hover:bg-foreground/5">
+                    <span className="text-xs font-semibold">{r.name}</span>
+                    {r.locality && <span className="text-[10px] text-muted-foreground">{r.locality}</span>}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
         <button
           onClick={tryDemo}
-          className="group flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground transition hover:brightness-110"
+          disabled={loading || !name.trim()}
+          className="group flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground transition hover:brightness-110 disabled:opacity-50"
         >
-          Try it live — free
-          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+          {loading ? <><Loader2 className="h-4 w-4 animate-spin" /> Setting up…</> : <>Try it live — free <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" /></>}
         </button>
-        <p className="text-center text-[10px] text-muted-foreground">
-          No login · no credit card · 30 seconds setup
-        </p>
+        <p className="text-center text-[10px] text-muted-foreground">No login · no credit card · 30 seconds</p>
       </div>
 
       <div className="mt-3 flex items-center justify-center gap-1.5 text-[10px] text-muted-foreground">
@@ -142,7 +222,7 @@ export function Dinein() {
 
             <div className="mt-9 flex flex-wrap gap-3">
               <a
-                href="https://book.retilo.io/demo"
+                href="https://book.retilo.io/demo/dinein"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => posthog.capture("dinein_demo_cta_clicked")}
