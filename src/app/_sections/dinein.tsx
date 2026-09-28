@@ -10,6 +10,17 @@ const API = "https://api.retilo.io"
 
 interface SwiggyResult { restaurantId: string; name: string; locality: string }
 
+function getCoords(): Promise<{ lat: number; lng: number } | null> {
+  return new Promise((resolve) => {
+    if (!navigator.geolocation) return resolve(null)
+    navigator.geolocation.getCurrentPosition(
+      (p) => resolve({ lat: p.coords.latitude, lng: p.coords.longitude }),
+      ()  => resolve(null),
+      { timeout: 4000, maximumAge: 60_000 },
+    )
+  })
+}
+
 function DemoWidget() {
   const [name, setName]           = useState("")
   const [query, setQuery]         = useState("")
@@ -18,15 +29,21 @@ function DemoWidget() {
   const [showDrop, setShowDrop]   = useState(false)
   const [picked, setPicked]       = useState<SwiggyResult | null>(null)
   const [loading, setLoading]     = useState(false)
+  const coordsRef                 = useRef<{ lat: number; lng: number } | null>(null)
   const searchTimer               = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   async function searchSwiggy(q: string) {
     if (q.length < 2) { setResults([]); setShowDrop(false); return }
     setSearching(true); setShowDrop(true)
     try {
-      const res  = await fetch(`${API}/v1/public/demo/swiggy-search?q=${encodeURIComponent(q)}`)
+      // get location on first search (cached after that)
+      if (!coordsRef.current) coordsRef.current = await getCoords()
+      const coords = coordsRef.current
+      const url = `${API}/v1/public/demo/swiggy-search?q=${encodeURIComponent(q)}`
+        + (coords ? `&lat=${coords.lat}&lng=${coords.lng}` : "")
+      const res  = await fetch(url)
       const data = await res.json()
-      setResults(data.restaurants ?? [])
+      setResults(data.restaurants ?? data.message ? [] : [])
     } catch { setResults([]) }
     finally { setSearching(false) }
   }
