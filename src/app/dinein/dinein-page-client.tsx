@@ -288,7 +288,7 @@ export function DineinPageClient() {
             </BgAnimateButton>
 
             <Link
-              href={`${BOOK_URL}/${DEMO_SLUG}/dinein`}
+              href={`${BOOK_URL}/${DEMO_SLUG}`}
               target="_blank"
               onClick={() => posthog.capture("dinein_hero_demo_clicked")}
               className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground hover:border-foreground/30"

@@ -71,7 +71,7 @@ function DemoWidget() {
       })
       const data = await res.json()
       if (data.slug) window.open(`https://book.retilo.io/demo/chat/${data.slug}`, "_blank")
-    } catch { /* open generic demo as fallback */ window.open("https://book.retilo.io/demo/dinein", "_blank") }
+    } catch { /* open generic demo as fallback */ window.open("https://book.retilo.io/demo", "_blank") }
     finally { setLoading(false) }
   }
 
@@ -239,7 +239,7 @@ export function Dinein() {
 
             <div className="mt-9 flex flex-wrap gap-3">
               <a
-                href="https://book.retilo.io/demo/dinein"
+                href="https://book.retilo.io/demo"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => posthog.capture("dinein_demo_cta_clicked")}
