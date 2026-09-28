@@ -1,85 +1,75 @@
 "use client"
 
+import { useState } from "react"
 import { ArrowRight, CalendarCheck, Palette, Sparkles, Users } from "lucide-react"
 import posthog from "posthog-js"
 
 import { Reveal } from "@/components/site/reveal"
 
-// Miniature of the real book.retilo.io/{slug}/dinein composer — taps, not typing.
-function BookingMock() {
+// Interactive demo widget — visitor enters their restaurant name and jumps to a live demo.
+function DemoWidget() {
+  const [name, setName] = useState("")
+
+  function tryDemo() {
+    const trimmed = name.trim()
+    posthog.capture("landing_demo_cta_clicked", { restaurantName: trimmed || undefined })
+    const url = trimmed
+      ? `https://book.retilo.io/demo?name=${encodeURIComponent(trimmed)}`
+      : "https://book.retilo.io/demo"
+    window.open(url, "_blank")
+  }
+
   return (
-    <div className="mx-auto w-full max-w-[340px] rounded-[28px] border border-border bg-background/80 p-4 shadow-2xl backdrop-blur">
-      <div className="mb-3 flex items-center gap-2.5">
-        <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-orange-500/15 text-base">
-          🍽️
+    <div className="mx-auto w-full max-w-[340px] rounded-[28px] border border-border bg-background/80 p-5 shadow-2xl backdrop-blur">
+      {/* Mini phone preview */}
+      <div className="mb-4 overflow-hidden rounded-2xl border border-border bg-foreground/[0.03]">
+        <div className="border-b border-border bg-primary/10 py-1 text-center text-[9px] font-bold uppercase tracking-widest text-primary">
+          LIVE DEMO
         </div>
-        <div>
-          <div className="text-sm font-semibold">Andhra Spice House</div>
-          <div className="text-[11px] text-muted-foreground">Jubilee Hills · Hyderabad</div>
+        <div className="flex items-center gap-2 border-b border-border px-3 py-2">
+          <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary/15 text-sm">🍽️</div>
+          <div>
+            <div className="text-xs font-semibold">{name.trim() || "Your Restaurant"}</div>
+            <div className="text-[10px] text-muted-foreground">AI-powered reservations</div>
+          </div>
+        </div>
+        <div className="space-y-2 p-3">
+          <div className="max-w-[85%] rounded-xl rounded-bl-sm bg-foreground/10 px-2.5 py-2 text-[11px] leading-relaxed">
+            Hi! I can help you book a table at <strong>{name.trim() || "your restaurant"}</strong>. What date works?
+          </div>
+          <div className="ml-auto max-w-[75%] rounded-xl rounded-br-sm bg-primary px-2.5 py-2 text-[11px] text-primary-foreground">
+            Table for 2, tomorrow at 7 PM
+          </div>
+          <div className="max-w-[85%] rounded-xl rounded-bl-sm bg-foreground/10 px-2.5 py-2 text-[11px] leading-relaxed">
+            Checking availability… got a slot at 7:30 PM. Your name?
+          </div>
         </div>
       </div>
 
-      <div className="space-y-3 rounded-2xl border border-border bg-foreground/[0.03] p-3">
-        <div>
-          <div className="mb-1.5 text-[10px] font-medium uppercase tracking-widest text-muted-foreground">
-            How many of you?
-          </div>
-          <div className="flex gap-1.5">
-            {[1, 2, 3, 4, 5].map((n) => (
-              <span
-                key={n}
-                className={
-                  n === 4
-                    ? "rounded-full bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground"
-                    : "rounded-full border border-border px-3 py-1 text-xs text-muted-foreground"
-                }
-              >
-                {n}
-              </span>
-            ))}
-          </div>
-        </div>
-        <div>
-          <div className="mb-1.5 text-[10px] font-medium uppercase tracking-widest text-muted-foreground">
-            Which day?
-          </div>
-          <div className="flex gap-1.5">
-            <span className="rounded-full bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground">
-              Today
-            </span>
-            {["Tomorrow", "Sat 5"].map((d) => (
-              <span key={d} className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground">
-                {d}
-              </span>
-            ))}
-          </div>
-        </div>
-        <div>
-          <div className="mb-1.5 text-[10px] font-medium uppercase tracking-widest text-muted-foreground">
-            What time?
-          </div>
-          <div className="flex gap-1.5">
-            {["7:00 PM", "7:30 PM", "8:00 PM"].map((t, i) => (
-              <span
-                key={t}
-                className={
-                  i === 1
-                    ? "rounded-full bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground"
-                    : "rounded-full border border-border px-3 py-1 text-xs text-muted-foreground"
-                }
-              >
-                {t}
-              </span>
-            ))}
-          </div>
-        </div>
-        <div className="rounded-xl bg-primary py-2.5 text-center text-xs font-semibold text-primary-foreground">
-          Find my table — 4 guests · Today · 7:30 PM
-        </div>
+      {/* Input + CTA */}
+      <div className="space-y-2.5">
+        <input
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && tryDemo()}
+          placeholder="Enter your restaurant name…"
+          maxLength={80}
+          className="w-full rounded-xl border border-border bg-foreground/[0.05] px-3.5 py-2.5 text-sm text-foreground outline-none transition placeholder:text-muted-foreground focus:border-primary"
+        />
+        <button
+          onClick={tryDemo}
+          className="group flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground transition hover:brightness-110"
+        >
+          Try it live — free
+          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+        </button>
+        <p className="text-center text-[10px] text-muted-foreground">
+          No login · no credit card · 30 seconds setup
+        </p>
       </div>
 
       <div className="mt-3 flex items-center justify-center gap-1.5 text-[10px] text-muted-foreground">
-        Powered by
+        Real bookings via
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/brands/swiggy.webp" alt="Swiggy" className="h-3.5 w-auto" />
         Dineout
@@ -150,18 +140,29 @@ export function Dinein() {
               ))}
             </ul>
 
-            <a
-              href="/dinein"
-              onClick={() => posthog.capture("dinein_section_cta_clicked")}
-              className="group mt-9 inline-flex items-center gap-2 rounded-2xl bg-primary px-7 py-3.5 text-base font-semibold text-primary-foreground transition-all hover:brightness-110 glow-purple"
-            >
-              Get your booking page
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-            </a>
+            <div className="mt-9 flex flex-wrap gap-3">
+              <a
+                href="https://book.retilo.io/demo"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => posthog.capture("dinein_demo_cta_clicked")}
+                className="group inline-flex items-center gap-2 rounded-2xl bg-primary px-7 py-3.5 text-base font-semibold text-primary-foreground transition-all hover:brightness-110 glow-purple"
+              >
+                Try it live — free
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              </a>
+              <a
+                href="/dinein"
+                onClick={() => posthog.capture("dinein_section_cta_clicked")}
+                className="inline-flex items-center gap-2 rounded-2xl border border-border px-7 py-3.5 text-base font-semibold transition-all hover:bg-foreground/5"
+              >
+                Learn more
+              </a>
+            </div>
           </Reveal>
 
           <Reveal delay={0.15}>
-            <BookingMock />
+            <DemoWidget />
           </Reveal>
         </div>
       </div>
