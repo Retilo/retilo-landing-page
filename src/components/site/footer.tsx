@@ -23,6 +23,15 @@ const productLinks = [
   { href: siteConfig.docsUrl, label: "Documentation", external: true },
 ]
 
+const toolLinks = [
+  { href: "/tools", label: "All Free Tools" },
+  { href: "/tools/tip-calculator", label: "Tip Calculator" },
+  { href: "/tools/food-cost-calculator", label: "Food Cost Calculator" },
+  { href: "/tools/gst-calculator", label: "GST Calculator" },
+  { href: "/tools/qr-menu-generator", label: "QR Menu Generator" },
+  { href: "/tools/review-reply-generator", label: "Review Reply Generator" },
+]
+
 const companyLinks = [
   { href: "/about", label: "About us" },
   { href: "/help", label: "Help & Support" },
@@ -49,7 +58,7 @@ export function Footer() {
       <div className="mx-auto max-w-6xl px-6 py-16">
         <div className="grid gap-12 md:grid-cols-12">
           {/* Brand */}
-          <div className="md:col-span-4">
+          <div className="md:col-span-3">
             <Link href="/" className="flex items-center gap-2">
               <Image
                 src="/logo.png"
@@ -87,6 +96,22 @@ export function Footer() {
           </div>
 
           <div className="md:col-span-2">
+            <h3 className="text-sm font-semibold text-foreground">Free Tools</h3>
+            <ul className="mt-4 space-y-3">
+              {toolLinks.map((l) => (
+                <li key={l.label}>
+                  <Link
+                    href={l.href}
+                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                  >
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="md:col-span-1">
             <h3 className="text-sm font-semibold text-foreground">Company</h3>
             <ul className="mt-4 space-y-3">
               {companyLinks.map((l) => (
