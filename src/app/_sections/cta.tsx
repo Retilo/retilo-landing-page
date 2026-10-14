@@ -2,12 +2,16 @@
 
 import { ArrowRight } from "lucide-react"
 import posthog from "posthog-js"
+import { useState } from "react"
 
 import { siteConfig } from "@/config/site"
+import { LeadModal } from "@/components/site/lead-modal"
 import { FloatingOrbs } from "@/components/site/floating-orbs"
 import { Reveal } from "@/components/site/reveal"
 
 export function CTA() {
+  const [modalOpen, setModalOpen] = useState(false)
+
   return (
     <section className="relative py-24">
       <div className="mx-auto max-w-6xl px-6">
@@ -28,7 +32,7 @@ export function CTA() {
             </p>
             <div className="relative mt-9 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
               <a
-                href={siteConfig.appRegisterUrl}
+                href={`${siteConfig.appRegisterUrl}&utm_source=retilo.io&utm_medium=bottom_cta`}
                 onClick={() =>
                   posthog.capture("bottom_cta_get_started_clicked")
                 }
@@ -37,17 +41,21 @@ export function CTA() {
                 Get started free
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </a>
-              <a
-                href={`mailto:${siteConfig.inquiryEmail}`}
-                onClick={() => posthog.capture("bottom_cta_book_demo_clicked")}
+              <button
+                onClick={() => {
+                  posthog.capture("bottom_cta_book_demo_clicked")
+                  setModalOpen(true)
+                }}
                 className="inline-flex items-center gap-2 rounded-2xl border border-border px-8 py-4 text-base font-semibold text-foreground transition-colors hover:bg-foreground/5"
               >
                 Book a demo
-              </a>
+              </button>
             </div>
           </div>
         </Reveal>
       </div>
+
+      <LeadModal open={modalOpen} onClose={() => setModalOpen(false)} />
     </section>
   )
 }

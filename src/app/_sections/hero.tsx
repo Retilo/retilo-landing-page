@@ -2,14 +2,17 @@
 
 import { ArrowRight, MessageCircle, Sparkles, Star, Zap } from "lucide-react"
 import posthog from "posthog-js"
+import { useState } from "react"
 
 import { siteConfig } from "@/config/site"
+import { LeadModal } from "@/components/site/lead-modal"
 import { AgentNPC } from "@/components/site/agent-npc"
 import { ClayBubbles } from "@/components/site/clay-bubbles"
 import { Reveal } from "@/components/site/reveal"
 import { StoreBadges } from "@/components/site/store-badges"
 
 export function Hero() {
+  const [modalOpen, setModalOpen] = useState(false)
   return (
     <section className="relative overflow-hidden pb-24 pt-40 sm:pt-48">
       {/* Backdrop */}
@@ -65,20 +68,22 @@ export function Hero() {
         <Reveal delay={0.28}>
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <a
-              href={siteConfig.appRegisterUrl}
+              href={`${siteConfig.appRegisterUrl}&utm_source=retilo.io&utm_medium=hero_cta`}
               onClick={() => posthog.capture("hero_cta_clicked")}
               className="group inline-flex items-center gap-2 rounded-2xl bg-primary px-7 py-3.5 text-base font-semibold text-primary-foreground transition-all hover:brightness-110 glow-purple"
             >
               Get started free
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </a>
-            <a
-              href="#platform"
-              onClick={() => posthog.capture("hero_see_how_it_works_clicked")}
+            <button
+              onClick={() => {
+                posthog.capture("hero_book_demo_clicked")
+                setModalOpen(true)
+              }}
               className="glass inline-flex items-center gap-2 rounded-2xl px-7 py-3.5 text-base font-semibold text-foreground transition-colors hover:bg-foreground/5"
             >
-              See how it works
-            </a>
+              Book a demo
+            </button>
           </div>
           <p className="mt-4 text-xs text-muted-foreground">
             No credit card · No setup fees · Free AI business scan in 60 seconds
@@ -95,6 +100,8 @@ export function Hero() {
           <AgentNPC />
         </div>
       </div>
+
+      <LeadModal open={modalOpen} onClose={() => setModalOpen(false)} />
     </section>
   )
 }
