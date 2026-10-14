@@ -1,6 +1,8 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
+
+import { useTrack } from "@/hooks/use-track"
 
 const PRESET_TIPS = [5, 10, 15, 18, 20, 25]
 
@@ -38,14 +40,21 @@ function ResultCard({
 }
 
 export function TipCalculatorClient() {
+  const track = useTrack()
   const [bill, setBill] = useState("")
   const [tipPercent, setTipPercent] = useState(10)
   const [people, setPeople] = useState(1)
+
+  useEffect(() => { track("tool_opened", { tool: "tip-calculator" }) }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const billNum = parseFloat(bill) || 0
   const tip = (billNum * tipPercent) / 100
   const total = billNum + tip
   const perPerson = people > 0 ? total / people : 0
+
+  useEffect(() => {
+    if (billNum > 0) track("tool_used", { tool: "tip-calculator", bill: billNum, tip_pct: tipPercent, people })
+  }, [billNum, tipPercent, people]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="space-y-4">

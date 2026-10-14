@@ -1,6 +1,8 @@
 "use client"
 
 import { useState } from "react"
+
+import { useTrack } from "@/hooks/use-track"
 import { IconCopy, IconCheck, IconStar } from "@tabler/icons-react"
 
 type Tone = "professional" | "warm" | "apologetic"
@@ -132,6 +134,7 @@ function generateReply(
 }
 
 export function ReviewReplyClient() {
+  const track = useTrack()
   const [rating, setRating] = useState(0)
   const [hoverRating, setHoverRating] = useState(0)
   const [review, setReview] = useState("")
@@ -143,6 +146,7 @@ export function ReviewReplyClient() {
   function generate() {
     if (rating === 0) return
     setReply(generateReply(rating, review, restaurantName, tone))
+    track("tool_used", { tool: "review-reply-generator", rating, tone })
   }
 
   async function copy() {

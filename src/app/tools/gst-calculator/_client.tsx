@@ -1,6 +1,8 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
+
+import { useTrack } from "@/hooks/use-track"
 
 type Mode = "add" | "extract"
 type Rate = 5 | 18
@@ -11,6 +13,7 @@ const RATE_INFO: Record<Rate, string> = {
 }
 
 export function GstCalculatorClient() {
+  const track = useTrack()
   const [mode, setMode] = useState<Mode>("add")
   const [amount, setAmount] = useState("")
   const [rate, setRate] = useState<Rate>(5)
@@ -35,6 +38,10 @@ export function GstCalculatorClient() {
   }
 
   const hasResult = amountNum > 0
+
+  useEffect(() => {
+    if (hasResult) track("tool_used", { tool: "gst-calculator", mode, rate })
+  }, [hasResult, mode, rate]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="space-y-4">

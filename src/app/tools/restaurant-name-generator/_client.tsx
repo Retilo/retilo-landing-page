@@ -1,6 +1,8 @@
 "use client"
 
 import { useState } from "react"
+
+import { useTrack } from "@/hooks/use-track"
 import { IconCopy, IconRefresh, IconCheck } from "@tabler/icons-react"
 
 type Cuisine =
@@ -167,6 +169,7 @@ function generateNames(
 }
 
 export function NameGeneratorClient() {
+  const track = useTrack()
   const [cuisine, setCuisine] = useState<Cuisine>("indian")
   const [vibe, setVibe] = useState<Vibe>("casual")
   const [keyword, setKeyword] = useState("")
@@ -175,6 +178,7 @@ export function NameGeneratorClient() {
 
   function generate() {
     setNames(generateNames(cuisine, vibe, keyword))
+    track("tool_used", { tool: "restaurant-name-generator", cuisine, vibe })
   }
 
   async function copy(name: string) {

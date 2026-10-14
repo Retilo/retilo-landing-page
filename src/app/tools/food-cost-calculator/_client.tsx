@@ -1,6 +1,8 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
+
+import { useTrack } from "@/hooks/use-track"
 import { IconPlus, IconTrash } from "@tabler/icons-react"
 
 interface Ingredient {
@@ -38,6 +40,7 @@ function StatusBadge({ pct }: { pct: number }) {
 }
 
 export function FoodCostClient() {
+  const track = useTrack()
   const [ingredients, setIngredients] = useState<Ingredient[]>([
     { id: uid(), name: "", qty: "", costPerUnit: "", unit: "g" },
   ])
@@ -73,6 +76,10 @@ export function FoodCostClient() {
 
   const suggestedPrice30 = totalCost / 0.3
   const suggestedPrice35 = totalCost / 0.35
+
+  useEffect(() => {
+    if (spNum > 0 && totalCost > 0) track("tool_used", { tool: "food-cost-calculator", food_cost_pct: Math.round(foodCostPct) })
+  }, [spNum, totalCost]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="space-y-4">

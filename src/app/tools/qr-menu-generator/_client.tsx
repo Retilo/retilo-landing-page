@@ -1,6 +1,8 @@
 "use client"
 
 import { useEffect, useState } from "react"
+
+import { useTrack } from "@/hooks/use-track"
 import { IconDownload, IconQrcode } from "@tabler/icons-react"
 
 function buildQrUrl(data: string, size = 280) {
@@ -8,6 +10,7 @@ function buildQrUrl(data: string, size = 280) {
 }
 
 export function QrMenuClient() {
+  const track = useTrack()
   const [menuUrl, setMenuUrl] = useState("")
   const [restaurantName, setRestaurantName] = useState("")
   const [qrSrc, setQrSrc] = useState("")
@@ -18,10 +21,12 @@ export function QrMenuClient() {
     const url = menuUrl.startsWith("http") ? menuUrl : `https://${menuUrl}`
     setQrSrc(buildQrUrl(url, 400))
     setGenerated(true)
+    track("tool_used", { tool: "qr-menu-generator" })
   }
 
   async function download() {
     if (!qrSrc) return
+    track("tool_downloaded", { tool: "qr-menu-generator" })
     try {
       const res = await fetch(qrSrc)
       const blob = await res.blob()
