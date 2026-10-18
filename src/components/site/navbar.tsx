@@ -13,7 +13,7 @@ const links = [
   { href: "/#platform", label: "Platform" },
   { href: "/#apps", label: "Apps" },
   { href: "/#vision", label: "Why Retilo" },
-  { href: "/#faq", label: "FAQ" },
+  { href: "/blog", label: "Blog" },
   { href: siteConfig.docsUrl, label: "Docs", external: true },
 ]
 

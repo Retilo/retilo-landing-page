@@ -34,6 +34,7 @@ const toolLinks = [
 
 const companyLinks = [
   { href: "/about", label: "About us" },
+  { href: "/blog", label: "Blog" },
   { href: "/help", label: "Help & Support" },
   { href: "/#vision", label: "Our vision" },
 ]
