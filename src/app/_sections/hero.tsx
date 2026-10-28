@@ -1,6 +1,6 @@
 "use client"
 
-import { ArrowRight, MessageCircle, Sparkles, Star, Zap } from "lucide-react"
+import { ArrowRight, MessageCircle, Phone, Sparkles, Star, Zap } from "lucide-react"
 import posthog from "posthog-js"
 import { useState } from "react"
 
@@ -88,6 +88,25 @@ export function Hero() {
           <p className="mt-4 text-xs text-muted-foreground">
             No credit card · No setup fees · Free AI business scan in 60 seconds
           </p>
+        </Reveal>
+
+        {/* Live demo — call the AI receptionist. Tap-to-call on mobile. */}
+        <Reveal delay={0.32}>
+          <a
+            href="tel:+918065589900"
+            onClick={() => posthog.capture("hero_call_ai_clicked")}
+            className="glass mx-auto mt-8 inline-flex items-center gap-3 rounded-2xl border border-primary/30 px-5 py-3 text-sm text-foreground transition-colors hover:bg-primary/5"
+          >
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary/70" />
+              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-primary" />
+            </span>
+            <Phone className="h-4 w-4 text-primary" />
+            <span>
+              Hear it live — call our AI receptionist:{" "}
+              <span className="font-semibold text-primary">+91 80 6558 9900</span>
+            </span>
+          </a>
         </Reveal>
 
         <Reveal delay={0.36}>
