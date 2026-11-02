@@ -372,10 +372,8 @@ export function DineinPageClient() {
             <div className="flex flex-wrap items-center gap-3">
               <span className="inline-flex items-center gap-2 rounded-full border border-border bg-background/60 px-3.5 py-1.5 text-xs font-medium text-muted-foreground backdrop-blur-sm">
                 <Sparkles className="h-3 w-3 text-primary" />
-                Powered by
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/brands/swiggy.webp" alt="Swiggy" className="h-3.5 w-auto" />
-                Dineout
+                <img src="/brands/dineout-powered-by-light.svg" alt="Powered by Swiggy Dineout" className="h-4 w-auto" />
               </span>
               <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 text-xs font-semibold text-emerald-400">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
@@ -473,7 +471,7 @@ export function DineinPageClient() {
               className="absolute -bottom-4 -left-4 flex items-center gap-2 rounded-2xl border border-white/[0.1] bg-[#0e0f12]/95 backdrop-blur-xl px-3 py-2 shadow-xl"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/brands/swiggy.webp" alt="Swiggy" className="h-5 w-auto" />
+              <img src="/brands/swiggy-logo-square.svg" alt="Swiggy" className="h-7 w-7 rounded-md" />
               <div>
                 <div className="text-[10px] font-bold text-foreground">Real Swiggy Dineout</div>
                 <div className="text-[9px] text-muted-foreground">Live slots · Confirmed instantly</div>
@@ -573,7 +571,7 @@ export function DineinPageClient() {
       <section className="mx-auto max-w-3xl px-6 py-4">
         <div className="glass-card flex flex-col items-center gap-3 p-6 text-center sm:flex-row sm:justify-center sm:gap-4">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/brands/swiggy.webp" alt="Swiggy" className="h-8 w-auto" />
+          <img src="/brands/dineout-powered-by-light.svg" alt="Powered by Swiggy Dineout" className="h-8 w-auto" />
           <p className="text-sm text-muted-foreground">
             Every reservation is a real{" "}
             <span className="font-semibold text-foreground">Swiggy Dineout</span>{" "}

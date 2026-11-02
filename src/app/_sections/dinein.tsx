@@ -168,7 +168,7 @@ function DemoWidget() {
       <div className="mt-3 flex items-center justify-center gap-1.5 text-[10px] text-muted-foreground">
         Real bookings via
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/brands/swiggy.webp" alt="Swiggy" className="h-3.5 w-auto" />
+        <img src="/brands/swiggy-logo-square.svg" alt="Swiggy" className="h-4 w-4 rounded-[3px]" />
         Dineout
       </div>
     </div>
@@ -220,7 +220,7 @@ export function Dinein() {
             <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-border bg-foreground/[0.03] px-4 py-2">
               <span className="text-xs text-muted-foreground">Official reservations via</span>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/brands/swiggy.webp" alt="Swiggy" className="h-5 w-auto" />
+              <img src="/brands/dineout-powered-by-light.svg" alt="Swiggy Dineout" className="h-5 w-auto" />
             </div>
 
             <ul className="mt-8 space-y-5">

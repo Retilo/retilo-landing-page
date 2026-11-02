@@ -173,10 +173,8 @@ export function DineinAdClient() {
         >
           <p className="mx-auto inline-flex items-center gap-2 rounded-full border border-border px-4 py-1.5 text-xs font-medium text-muted-foreground">
             <Sparkles className="h-3.5 w-3.5 text-primary" />
-            Powered by
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/brands/swiggy.webp" alt="Swiggy" className="h-4 w-auto" />
-            Dineout
+            <img src="/brands/dineout-powered-by-light.svg" alt="Powered by Swiggy Dineout" className="h-4 w-auto" />
           </p>
           <h1 className="mt-6 text-4xl font-bold tracking-tight sm:text-6xl">
             Your tables,
@@ -251,7 +249,7 @@ export function DineinAdClient() {
       <section className="mx-auto max-w-3xl px-6 pb-4 pt-2">
         <div className="glass-card flex flex-col items-center gap-3 p-6 text-center sm:flex-row sm:justify-center sm:gap-4">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/brands/swiggy.webp" alt="Swiggy" className="h-8 w-auto" />
+          <img src="/brands/dineout-powered-by-light.svg" alt="Powered by Swiggy Dineout" className="h-8 w-auto" />
           <p className="text-sm text-muted-foreground">
             Every reservation is a real <span className="font-semibold text-foreground">Swiggy Dineout</span> booking —
             slots, deals and confirmations your guests already trust.
