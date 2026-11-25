@@ -218,7 +218,7 @@ export function Dinein() {
               <img src="/brands/swiggy-logo-square.svg" alt="Swiggy" className="h-8 w-8 rounded-lg" />
               <div>
                 <p className="text-xs font-bold uppercase tracking-widest text-[#FC8019]">Official Partner</p>
-                <p className="mt-0.5 text-sm font-semibold text-foreground">Swiggy Builders Club Integration</p>
+                <p className="mt-0.5 text-sm font-semibold text-foreground">Official Swiggy Integration</p>
               </div>
             </div>
             <div className="flex flex-wrap gap-2">
