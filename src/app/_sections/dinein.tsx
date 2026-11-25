@@ -196,26 +196,56 @@ const points = [
   },
 ]
 
+const MARKET_STATS = [
+  { value: "#1",    label: "dining-out platform in India" },
+  { value: "50K+",  label: "Swiggy Dineout restaurants" },
+  { value: "< 2 s", label: "booking confirmation" },
+  { value: "0",     label: "typing required for guests" },
+]
+
 export function Dinein() {
   return (
     <section id="dinein" className="relative scroll-mt-24 py-24">
-      <div className="absolute inset-x-0 top-1/4 -z-10 h-[500px] bg-[radial-gradient(ellipse_50%_50%_at_50%_50%,hsl(24_95%_53%/0.08),transparent_70%)]" />
+      <div className="absolute inset-x-0 top-1/4 -z-10 h-[600px] bg-[radial-gradient(ellipse_55%_55%_at_50%_50%,hsl(24_95%_53%/0.10),transparent_70%)]" />
 
       <div className="mx-auto max-w-6xl px-6">
+
+        {/* ── Partnership announcement banner ─────────────────── */}
+        <Reveal>
+          <div className="mb-10 flex flex-col items-center gap-4 sm:flex-row sm:items-center sm:justify-between rounded-2xl border border-border bg-foreground/[0.025] px-6 py-5">
+            <div className="flex items-center gap-3">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/brands/swiggy-logo-square.svg" alt="Swiggy" className="h-8 w-8 rounded-lg" />
+              <div>
+                <p className="text-xs font-bold uppercase tracking-widest text-[#FC8019]">Official Partner</p>
+                <p className="mt-0.5 text-sm font-semibold text-foreground">Swiggy Builders Club Integration</p>
+              </div>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {MARKET_STATS.map((s) => (
+                <div key={s.label} className="rounded-xl border border-border bg-background px-3 py-2 text-center">
+                  <p className="text-base font-black leading-none text-foreground">{s.value}</p>
+                  <p className="mt-0.5 text-[10px] text-muted-foreground">{s.label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Reveal>
+
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <Reveal>
-            <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-primary">
-              <Sparkles className="h-4 w-4" /> New · Table bookings
+            <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-[#FC8019]">
+              <Sparkles className="h-4 w-4" /> AI-powered table bookings
             </p>
             <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-5xl">
-              Your tables,
+              India&apos;s first AI booking layer
               <br />
-              <span className="gradient-text-pb">booked in four taps.</span>
+              <span className="gradient-text-pb">on Swiggy Dineout.</span>
             </h2>
             <p className="mt-5 max-w-xl text-base text-muted-foreground sm:text-lg">
-              Retilo gives every restaurant a beautiful, brandable booking page
-              backed by Swiggy Dineout. Guests tap — never type — and the
-              reservation lands in your Swiggy dashboard instantly.
+              Retilo sits as an intelligent agent on top of Swiggy Dineout&apos;s
+              reservation network — turning every WhatsApp message, QR scan, or
+              website visit into a confirmed table in under 2 seconds.
             </p>
             <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-border bg-foreground/[0.03] px-4 py-2">
               <span className="text-xs text-muted-foreground">Official reservations via</span>
